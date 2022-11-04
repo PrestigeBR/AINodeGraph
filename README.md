@@ -1,5 +1,5 @@
 # AINodeGraph
-Simple AI Task/State Machine and NodeGraph editor for runtime implementation. Slightly depending on our schools proprietary engine, "Tengine". Fully dependant on ImGui and ImNodes.
+Simple AI Task/State Machine and NodeGraph editor for runtime implementation. Slightly dependant on our schools proprietary engine, "Tengine". Fully dependant on ImGui and ImNodes.
 
 Any use of these codes outside of Tengine will require slight source modifications of varibale types.
 
@@ -38,6 +38,8 @@ ExecuteTask(PatrolRandomlyTask);
 ```
 
 ## How to use AI Node Graph
+
+Add ImNodes start/destroy context functions to the same place where you have ImGui start/destroy context functions.
 
 Initialize a new AINodeGraph instance somewhere, and run ```cpp DrawAIGraph();``` in a Tick/Update function.
 
