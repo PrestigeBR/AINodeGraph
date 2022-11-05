@@ -34,7 +34,8 @@ This can look something like this:
 In Update/Tick Function:
 if(ExecuteTask(FindPlayerTask))
     ExecuteTask(PathToPlayerTask);
-ExecuteTask(PatrolRandomlyTask);
+else
+    ExecuteTask(PatrolRandomlyTask);
 ```
 
 ## How to use AI Node Graph
