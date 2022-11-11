@@ -1,9 +1,8 @@
 #pragma once
-#include <tgCString.h>
-#include <tgTypes.h>
 
 #include <tgMemoryDisable.h>
 #include <vector>
+#include <string>
 #include <tgMemoryEnable.h>
 
 struct AINodeProperty;
@@ -20,11 +19,11 @@ public:
 
 	bool HasFinishedExecute = false;
 
-	tgCString m_Name = "MISSINGNO";
+	std::string m_Name = "MISSINGNO";
 
 	AIBrain* m_Brain = nullptr;
 
-	tgFloat m_LastExecuteTime = 0.f;
+	float m_LastExecuteTime = 0.f;
 
 	std::vector<AINodeProperty*> Properties;
 

@@ -15,7 +15,7 @@ public:
 
 	bool GetCanBeDeleted() override;
 
-	tgCString GetNodeName() override;
+	std::string GetNodeName() override;
 
 	tgCColor GetNodeColor() override;
 
@@ -39,9 +39,9 @@ inline bool AINode_Start::GetCanBeDeleted()
 	return false;
 }
 
-inline tgCString AINode_Start::GetNodeName()
+inline std::string AINode_Start::GetNodeName()
 {
-	return tgCString("Event Tick");
+	return "Event Tick";
 }
 
 inline tgCColor AINode_Start::GetNodeColor()

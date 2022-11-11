@@ -2,11 +2,12 @@
 #include "AITaskLookForPlayer.h"
 
 #include "AIBrain/AIBrain.h"
-#include "Imported/CLevel.h"
 #include "Imported/Enemy/CEnemy.h"
 #include "Imported/Player/CPlayer.h"
 
 #include <tgLog.h>
+
+#include "LevelManager/CLevelManager.h"
 
 AITaskLookForPlayer::AITaskLookForPlayer(AIBrain* Brain, tgCString Name) : AITask(Brain)
 {
@@ -19,7 +20,7 @@ AITaskLookForPlayer::AITaskLookForPlayer(AIBrain* Brain, tgCString Name) : AITas
 
 bool AITaskLookForPlayer::OnTaskBeginExecute()
 {
-	CPlayer* Player = CLevel::GetInstance().m_pPlayer;
+	CPlayer* Player = CLevelManager::GetInstance().GetCurrentLevel()->m_pPlayer;
 	CEnemy* Pawn = m_Brain->m_ControlledPawn;
 
 	//Change Enemy to PhysicsObject

@@ -1,13 +1,14 @@
 #include <tgSystem.h>
 #include "AINodeGraph.h"
 
-#include <imgui.h>
+#include <tgMemoryDisable.h>
+#include "imgui.h"
+#include "imnodes.h"
+#include <tgMemoryEnable.h>
 
 #include "AINode_Sequence.h"
 #include "AINode_Start.h"
 #include "AINode_Task.h"
-#include "imnodes.h"
-#include "Imported/CLevel.h"
 #include "Imported/Enemy/CEnemy.h"
 
 #include <tgLog.h>
@@ -19,10 +20,10 @@ AINodeGraph::AINodeGraph(AIBrain* Brain) : Brain(Brain)
 AINodeGraph::~AINodeGraph()
 {
 	//UninitObjects();
-	for (AINodeObject* obj : nodes)
+	for (int i = 0; i < nodes.size(); ++i)
 	{
-		delete obj;
-		obj = nullptr;
+		delete nodes[i];
+		nodes[i] = nullptr;
 	}
 }
 
@@ -33,6 +34,7 @@ void AINodeGraph::Draw()
 	///		GRAPH INIT
 	///
 	/////////////////////////////////////////////////
+	
 	if (MarkedForKill) return;
 	if(!HasInitialized)
 	{
@@ -172,7 +174,7 @@ void AINodeGraph::Draw()
 
 				{
 					ImNodes::BeginNodeTitleBar();
-					ImGui::TextColored(CLevel::GetInstance().tgCColorToImVec4(obj->GetNodeTextColor()), tgCString("%s", obj->GetNodeName().String()).String());
+					ImGui::TextColored(CLevelManager::GetInstance().GetCurrentLevel()->tgCColorToImVec4(obj->GetNodeTextColor()), tgCString("%s", obj->GetNodeName().c_str()).String());
 					ImNodes::EndNodeTitleBar();
 				}
 
@@ -309,7 +311,7 @@ void AINodeGraph::Draw()
 
 		/////////////////////////////////////////////////
 		///
-		///		NODE DEPRECATED REMOVE LINK CODE
+		///		NODE (UNUSED) REMOVE LINK CODE
 		///
 		/////////////////////////////////////////////////
 
@@ -383,7 +385,6 @@ void AINodeGraph::Draw()
 	/////////////////////////////////////////////////
 
 	interp:
-	//Update
 	UpdateObjectLinks();
 }
 
@@ -410,6 +411,7 @@ void AINodeGraph::InitObject(AINodeObject* Object)
 
 void AINodeGraph::UninitObjects()
 {
+	MarkForKill();
 	for (int i = 0; i < nodes.size(); ++i)
 	{
 		if(nodes[i])nodes[i]->CleanupNode();

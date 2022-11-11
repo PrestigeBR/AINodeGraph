@@ -1,9 +1,9 @@
 #include <tgSystem.h>
 #include "AITaskChasePlayer.h"
 
-#include "Imported/CLevel.h"
 #include "Imported/Enemy/CEnemy.h"
 #include "Imported/Player/CPlayer.h"
+#include "LevelManager/CLevelManager.h"
 
 AITaskChasePlayer::AITaskChasePlayer(AIBrain* Brain, tgCString Name) : AITask(Brain)
 {
@@ -12,7 +12,7 @@ AITaskChasePlayer::AITaskChasePlayer(AIBrain* Brain, tgCString Name) : AITask(Br
 
 bool AITaskChasePlayer::OnTaskBeginExecute()
 {
-	CPlayer* Player = CLevel::GetInstance().m_pPlayer;
+	CPlayer* Player = CLevelManager::GetInstance().GetCurrentLevel()->m_pPlayer;
 	CEnemy* Pawn = m_Brain->m_ControlledPawn;
 
 	Pawn->m_Target = Player->GetTransform().GetMatrixLocal().Pos;

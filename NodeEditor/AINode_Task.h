@@ -1,8 +1,8 @@
 #pragma once
 #include "AINodeObject.h"
-#include "Imported/CLevel.h"
 
 #include "Imported/Enemy/CEnemy.h"
+#include "LevelManager/CLevelManager.h"
 
 class AINode_Task : public AINodeObject
 {
@@ -25,7 +25,7 @@ public:
 
 	AINodeObject* ExecuteNodeLogicOnInterpretation(AIBrain* Brain) override;
 
-	tgCString GetNodeName() override;
+	std::string GetNodeName() override;
 
 	tgCColor GetNodeColor() override;
 
@@ -61,13 +61,13 @@ inline void AINode_Task::AllocateDefaultPins(int& InputID)
 inline void AINode_Task::RenderSpecialUI(int& inputID)
 {
 	tgCString in("###%s%i", Task->m_Name, NodeID);
-	if (ImGui::BeginCombo("", Task->m_Name.String(), ImGuiComboFlags_NoPreview))
+	if (ImGui::BeginCombo("", Task->m_Name.c_str(), ImGuiComboFlags_NoPreview))
 	{
-		for (AITask* TItem : CLevel::GetInstance().m_pEnemy->TaskList)
+		for (AITask* TItem : CLevelManager::GetInstance().GetCurrentLevel()->m_pEnemy->TaskList)
 		{
-			tgBool isSelected = TItem->m_Name.String() == Task->m_Name.String();
+			tgBool isSelected = TItem->m_Name.c_str() == Task->m_Name.c_str();
 
-			if (ImGui::Selectable(TItem->m_Name.String(), isSelected))
+			if (ImGui::Selectable(TItem->m_Name.c_str(), isSelected))
 			{
 				Task = TItem;
 			}
@@ -75,12 +75,12 @@ inline void AINode_Task::RenderSpecialUI(int& inputID)
 		ImGui::EndCombo();
 	}
 	tgCString s2("Class: %s", Task->m_Name);
-	ImGui::TextColored(CLevel::GetInstance().tgCColorToImVec4(tgCColor::White), s2.String());
+	ImGui::TextColored(CLevelManager::GetInstance().GetCurrentLevel()->tgCColorToImVec4(tgCColor::White), s2.String());
 }
 
 inline AINodeObject* AINode_Task::InitializeNode()
 {
-	Task = CLevel::GetInstance().m_pEnemy->TaskList[0];
+	Task = CLevelManager::GetInstance().GetCurrentLevel()->m_pEnemy->TaskList[0];
 
 	InputPins = 1;
 	OutputPins = 2;
@@ -97,9 +97,9 @@ inline AINodeObject* AINode_Task::ExecuteNodeLogicOnInterpretation(AIBrain* Brai
 	return False;
 }
 
-inline tgCString AINode_Task::GetNodeName()
+inline std::string AINode_Task::GetNodeName()
 {
-	return tgCString("%s", Task->m_Name);
+	return Task->m_Name;
 }
 
 inline tgCColor AINode_Task::GetNodeColor()

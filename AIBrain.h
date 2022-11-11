@@ -21,9 +21,9 @@ public:
 
 	void DebugCheckTasks();
 
-	tgFloat FrameCount = 0.f;
+	float FrameCount = 0.f;
 
-	tgFloat m_DeltaTime = 0.f;
+	float m_DeltaTime = 0.f;
 
 	void DestroyTasks() const;
 

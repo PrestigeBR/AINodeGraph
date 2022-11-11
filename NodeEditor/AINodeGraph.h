@@ -1,7 +1,6 @@
 #pragma once
 #include <tgMemoryDisable.h>
 #include <vector>
-#include <imgui.h>
 #include <tgMemoryEnable.h>
 
 #include "AINodeObject.h"

@@ -3,9 +3,7 @@
 
 #include <tgMemoryDisable.h>
 #include <vector>
-#include <imgui.h>
-#include <imnodes.h>
-#include <imnodes_internal.h>
+#include <string>
 #include <tgMemoryEnable.h>
 
 enum AINodeType
@@ -23,7 +21,7 @@ enum AINodePropertyType
 struct AINodeProperty
 {
 	AINodePropertyType Type = PROPERTY_FLOAT;
-	tgCString PropertyName = "Default Value";
+	std::string PropertyName = "Default Value";
 	float FloatValue = 0.f;
 	bool BoolValue = false;
 };
@@ -62,7 +60,7 @@ public:
 
 	//GRAPH RENDERING
 
-	virtual tgCString GetNodeName();
+	virtual std::string GetNodeName();
 
 	virtual tgCColor GetNodeColor();
 

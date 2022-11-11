@@ -4,9 +4,9 @@
 #include "AITaskChasePlayer.h"
 #include <tgLog.h>
 
-#include "Imported/CLevel.h"
 #include "Imported/Enemy/CEnemy.h"
 #include "Imported/Player/CPlayer.h"
+#include "LevelManager/CLevelManager.h"
 
 AIDistractTask::AIDistractTask(AIBrain* Brain, tgCString Name) : AITask(Brain)
 {
@@ -15,7 +15,7 @@ AIDistractTask::AIDistractTask(AIBrain* Brain, tgCString Name) : AITask(Brain)
 
 bool AIDistractTask::OnTaskBeginExecute()
 {
-	CPlayer* Player = CLevel::GetInstance().m_pPlayer;
+	CPlayer* Player = CLevelManager::GetInstance().GetCurrentLevel()->m_pPlayer;
 	CEnemy* Pawn = m_Brain->m_ControlledPawn;
 
 	if(Player->m_DistractionAmmo)

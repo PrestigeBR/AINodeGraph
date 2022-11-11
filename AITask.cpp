@@ -1,8 +1,6 @@
 #include <tgSystem.h>
 #include "AITask.h"
 
-#include <tgTypes.h>
-
 #include "AIBrain.h"
 
 AITask::AITask(AIBrain* Brain)

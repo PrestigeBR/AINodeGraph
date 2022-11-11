@@ -23,7 +23,7 @@ public:
 
 	void RenderSpecialUI(int& inputID) override;
 
-	tgCString GetNodeName() override;
+	std::string GetNodeName() override;
 
 	tgCColor GetNodeColor() override;
 
@@ -67,9 +67,9 @@ inline void AINode_Sequence::RenderSpecialUI(int& inputID)
 	}
 }
 
-inline tgCString AINode_Sequence::GetNodeName()
+inline std::string AINode_Sequence::GetNodeName()
 {
-	return tgCString("Sequence");
+	return "Sequence";
 }
 
 inline tgCColor AINode_Sequence::GetNodeColor()
